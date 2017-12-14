@@ -1,12 +1,17 @@
+import org.openqa.selenium.By;
+
 import static com.codeborne.selenide.Condition.disappear;
 import static com.codeborne.selenide.Selectors.byName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static org.openqa.selenium.By.name;
 
 public class StartPage {
+    By userName = name("userName");
+
     public StartPage loginAs(String name, String password) {
         $(byText("Войти")).click();
-        $(byName("userName")).val(name);
+        $(userName).val(name);
         $(byName("password")).val(password);
         $(byText("Войти")).click();
         $(".modal-content").waitUntil(disappear, 10000);
@@ -35,7 +40,7 @@ public class StartPage {
     }
 
     public ResultsPage pressCalculationPolicy() {
-        $(byText("Рассчитать полис")).click();
+        $(byText("Рассчитать")).click();
         return page(ResultsPage.class);
     }
 }
